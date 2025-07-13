@@ -1,89 +1,104 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Malla Contador Público - Semestres</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <h1>Malla Contador Público (FCEA) - Por Semestres</h1>
+const area = mat.dataset.area;
+          const creditos = parseInt(mat.dataset.creditos) || 0;
+          creditosPorArea[area] = (creditosPorArea[area] || 0) + creditos;
+        }
+      });
+      return creditosPorArea;
+    }
 
-  <div class="grid">
+    // Función para calcular créditos totales aprobados
+    function calcularCreditosTotales() {
+      let total = 0;
+      aprobadas.forEach(id => {
+        const mat = subjects.find(s => s.dataset.id === id);
+        if (mat) {
+          total += parseInt(mat.dataset.creditos) || 0;
+        }
+      });
+      return total;
+    }
 
-    <!-- Semestre 1 -->
-    <div class="semester">
-      <h2>Semestre 1</h2>
-      <div class="subject aprobado">Conceptos Contables</div>
-      <div class="subject aprobado">Administración y Gestión de las Organizaciones 1</div>
-      <div class="subject no_cursada">Introducción a la Microeconomía</div>
-      <div class="subject aprobado">Cálculo 1A</div>
-      <div class="subject aprobado">Cálculo 1B</div>
-    </div>
+    // Función que determina si una materia está habilitada para cursar
+    function estaHabilitada(mat, creditosPorArea, creditosTotales) {
+      // 1) Chequear previas
+      const prereqs = parsePrereqs(mat.dataset.prereq);
+      for (const pre of prereqs) {
+        if (!aprobadas.has(pre)) return false;
+      }
 
-    <!-- Semestre 2 -->
-    <div class="semester">
-      <h2>Semestre 2</h2>
-      <div class="subject aprobado">Contabilidad General 1</div>
-      <div class="subject aprobado">Derecho Civil</div>
-      <div class="subject no_cursada">Economía Descriptiva</div>
-    </div>
+      // 2) Chequear créditos mínimos en área si aplica
+      const area = mat.dataset.area;
+      if (mat.dataset.creditosRequeridosArea) {
+        const reqArea = mat.dataset.creditosRequeridosArea;
+        const reqAreaCantidad = parseInt(mat.dataset.creditosRequeridosAreaCantidad || '0');
+        if (!creditosPorArea[reqArea] || creditosPorArea[reqArea] < reqAreaCantidad) return false;
+      }
 
-    <!-- Semestre 3 -->
-    <div class="semester">
-      <h2>Semestre 3</h2>
-      <div class="subject no_cursada">Introducción a la Estadística</div>
-      <div class="subject no_cursada">Contabilidad General 2</div>
-      <div class="subject no_cursada">Derecho Comercial</div>
-      <div class="subject aprobado">Procesos y Sistemas de Información</div>
-    </div>
+      // 3) Chequear créditos mínimos totales si aplica
+      if (mat.dataset.creditosRequeridosTotal) {
+        const reqTotal = parseInt(mat.dataset.creditosRequeridosTotal);
+        if (creditosTotales < reqTotal) return false;
+      }
 
-    <!-- Semestre 4 -->
-    <div class="semester">
-      <h2>Semestre 4</h2>
-      <div class="subject no_habilitada">Contabilidad General 3/div>
-      <div class="subject no_habilitada">Matemática Financiera</div>
-      <div class="subject no_cursada">Legislación Laboral y Seguridad Social</div>
-      <div class="subject no_cursada">Derecho Societario</div>
-    </div>
+      // 4) Chequear créditos mínimos por otras áreas (opcional)
+      // Para soportar varios requisitos de áreas distintas (ej. gestión financiera)
+      for (const key of Object.keys(mat.dataset)) {
+        if (key.startsWith('creditosRequeridosArea')) {
+          // Excluimos el genérico creditosRequeridosArea y creditosRequeridosAreaCantidad
+          if (key === 'creditosRequeridosArea' || key === 'creditosRequeridosAreaCantidad') continue;
+          // Ejemplo: creditosRequeridosAreaAdministracion, creditosRequeridosAreaJuridica
+          const areaReq = key.replace('creditosRequeridosArea', '').toLowerCase();
+          const reqCant = parseInt(mat.dataset[key] || '0');
+          // Normalizamos área a minúsculas y comparamos con creditosPorArea
+          const creditosAreaAprob = creditosPorArea[areaReq.charAt(0).toUpperCase() + areaReq.slice(1)] || 0;
+          if (creditosAreaAprob < reqCant) return false;
+        }
+      }
 
-    <!-- Semestre 5 -->
-    <div class="semester">
-      <h2>Semestre 5</h2>
-      <div class="subject no_habilitada">Modelos y Sistemas de Costos</div>
-      <div class="subject no_cursada">Derecho Tributario</div> <!-- Previa pendiente -->
-      <div class="subject no_habilitada">Ética y Ejercicio Profesional</div>
-      <div class="subject no_cursada">Marketing Basico</div>
-    </div>
+      return true;
+    }
 
-    <!-- Semestre 6 -->
-    <div class="semester">
-      <h2>Semestre 6</h2>
-      <div class="subject no_habilitada">Contabilidad Superior 1</div>
-      <div class="subject no_habilitada">Control Interno</div>
-      <div class="subject no_habilitada">Contabilidad Gerencial</div>
-      <div class="subject no_habilitada">Tributaria 1</div>
-    </div>
+    // Función para actualizar visualización y estados
+    function actualizarEstado() {
+      const creditosPorArea = calcularCreditosPorArea();
+      const creditosTotales = calcularCreditosTotales();
 
-    <!-- Semestre 7 -->
-    <div class="semester">
-      <h2>Semestre 7</h2>
-      <div class="subject no_habilitada">Auditoria 1</div>
-      <div class="subject no_habilitada">Tributaria 2</div>
-      <div class="subject no_habilitada">Finanzas Corporativas</div>
-    </div>
+      subjects.forEach(mat => {
+        const id = mat.dataset.id;
 
-    <!-- Semestre 8 -->
-    <div class="semester">
-      <h2>Semestre 8</h2>
-      <div class="subject no_habilitada">Informes Profesionales de Contador Público</div>
-      <div class="subject no_habilitada">Práctica Pericial en el Ámbito Judicial</div>
-      <div class="subject no_habilitada">Gestión Financiera del Estado</div>
-    </div>
+        if (aprobadas.has(id)) {
+          mat.classList.add('aprobado');
+          mat.classList.remove('no_cursada');
+          mat.classList.remove('no_habilitada');
+        } else {
+          if (estaHabilitada(mat, creditosPorArea, creditosTotales)) {
+            mat.classList.add('no_cursada');
+            mat.classList.remove('no_habilitada');
+            mat.classList.remove('aprobado');
+          } else {
+            mat.classList.add('no_habilitada');
+            mat.classList.remove('no_cursada');
+            mat.classList.remove('aprobado');
+          }
+        }
+      });
+    }
 
-  </div>
+    // Evento click para marcar/desmarcar como aprobada
+    subjects.forEach(mat => {
+      mat.addEventListener('click', () => {
+        const id = mat.dataset.id;
+        if (aprobadas.has(id)) {
+          aprobadas.delete(id);
+        } else {
+          aprobadas.add(id);
+        }
+        actualizarEstado();
+      });
+    });
 
-  <footer>
-    <p>Actualizado por Melina - Julio 2025</p>
-  </footer>
+    // Inicializar estado al cargar
+    actualizarEstado();
+  </script>
 </body>
 </html>
