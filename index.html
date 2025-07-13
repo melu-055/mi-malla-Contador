@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Malla Interactiva Test</title>
+<title>Malla Interactiva - Contador Público (Plan 2012)</title>
 <style>
   body { font-family: Arial, sans-serif; margin: 20px; }
   .node {
@@ -12,21 +12,53 @@
     color: white;
     margin: 5px 5px 5px 0;
     display: inline-block;
-    background-color: #4CAF50;
   }
+  .aprobada { background-color: #4CAF50; }    /* verde */
+  .cursando { background-color: #FFC107; }    /* amarillo */
+  .pendiente { background-color: #9E9E9E; }   /* gris */
 </style>
 </head>
 <body>
-<h1>Malla Interactiva - Test</h1>
+<h1>Malla Interactiva - Contador Público (Plan 2012)</h1>
 <div id="malla"></div>
 
 <script>
-  const materias = ["Conceptos Contables", "Administración y Gestión de las Organizaciones", "Cálculo 1A"];
+  const data = [
+    { label: "Conceptos Contables", status: "aprobada" },
+    { label: "Administración y Gestión de las Organizaciones", status: "aprobada" },
+    { label: "Cálculo 1A", status: "aprobada" },
+    { label: "Cálculo 1B", status: "aprobada" },
+    { label: "Contabilidad General I", status: "pendiente" },
+    { label: "Derecho Civil I", status: "aprobada" },
+    { label: "Procesos y Sistemas de Información", status: "aprobada" },
+    { label: "Introducción a la Microeconomía", status: "cursando" },
+    { label: "Contabilidad General II", status: "cursando" },
+    { label: "Introducción a la Estadística", status: "cursando" },
+    { label: "Derecho Comercial I", status: "cursando" },
+    { label: "Derecho Societario", status: "cursando" },
+    { label: "Matemática II", status: "pendiente" },
+    { label: "Estadística II", status: "pendiente" },
+    { label: "Teoría Contable", status: "pendiente" },
+    { label: "Costos I", status: "pendiente" },
+    { label: "Contabilidad General III", status: "pendiente" },
+    { label: "Finanzas I", status: "pendiente" },
+    { label: "Sistemas Contables", status: "pendiente" },
+    { label: "Administración Financiera", status: "pendiente" },
+    { label: "Auditoría", status: "pendiente" },
+    { label: "Derecho Tributario I", status: "pendiente" },
+    { label: "Costos II", status: "pendiente" },
+    { label: "Contabilidad General IV", status: "pendiente" },
+    { label: "Derecho Comercial II", status: "pendiente" },
+    { label: "Tributación II", status: "pendiente" },
+    { label: "Taller de Ética Profesional", status: "pendiente" },
+    { label: "Taller de Práctica Profesional", status: "pendiente" }
+  ];
+
   const mallaDiv = document.getElementById("malla");
-  materias.forEach(materia => {
+  data.forEach(({ label, status }) => {
     const div = document.createElement("div");
-    div.textContent = materia;
-    div.className = "node";
+    div.textContent = label;
+    div.className = node ${status};
     mallaDiv.appendChild(div);
   });
 </script>
