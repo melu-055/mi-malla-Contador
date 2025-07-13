@@ -20,7 +20,7 @@ h1 {
 }
 
 .semester {
-  background-color: #f9e6ef;
+  background-color: #f9e6ef; /* rosadito pastel */
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -51,7 +51,34 @@ h1 {
 }
 
 /* Estados */
+
+/* Materias aprobadas: violeta pastel, texto tachado */
 .aprobado {
   background-color: #b399c8;
   color: #4b3869;
-  text-decoration
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+/* Materias no cursadas pero habilitadas: rosado pastel más fuerte */
+.no_cursada {
+  background-color: #f2b6cc;
+  color: #7a2a4d;
+  cursor: pointer;
+}
+
+/* Materias no habilitadas: gris */
+.no_habilitada {
+  background-color: #c7c7c7;
+  color: #6b6b6b;
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+}
