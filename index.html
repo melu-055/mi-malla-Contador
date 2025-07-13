@@ -1,4 +1,47 @@
-const area = mat.dataset.area;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Malla Contador Público - Semestres</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Malla Contador Público (FCEA) - Por Semestres</h1>
+
+  <div class="grid">
+    <!-- Semestres y materias aquí, con sus data-* para lógica -->
+    <div class="semester">
+      <h2>Semestre 1</h2>
+      <div class="subject no_cursada" data-id="conceptos-contables" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="">Conceptos contables</div>
+      <div class="subject no_cursada" data-id="administracion-gestion-organizaciones-1" data-area="Administracion" data-creditos="10" data-prereq="">Administración y Gestión de las Organizaciones 1</div>
+      <div class="subject no_cursada" data-id="introduccion-microeconomia" data-area="Economia" data-creditos="10" data-prereq="">Introducción a la Microeconomía</div>
+      <div class="subject no_cursada" data-id="calculo-1a" data-area="Metodos Cuantitativos" data-creditos="5" data-prereq="">Cálculo 1A</div>
+      <div class="subject no_habilitada" data-id="calculo-1b" data-area="Metodos Cuantitativos" data-creditos="5" data-prereq="calculo-1a">Cálculo 1B</div>
+    </div>
+
+    <!-- Sigue igual para los demás semestres -->
+    <!-- ... -->
+  </div>
+
+  <footer>
+    <p>Actualizado por Melina - Julio 2025</p>
+  </footer>
+
+  <script>
+    // Función para convertir un string de prereqs separados por coma en array
+    function parsePrereqs(prereqStr) {
+      return prereqStr ? prereqStr.split(',').map(s => s.trim()).filter(s => s.length > 0) : [];
+    }
+
+    const subjects = Array.from(document.querySelectorAll('.subject'));
+    let aprobadas = new Set();
+
+    function calcularCreditosPorArea() {
+      const creditosPorArea = {};
+      aprobadas.forEach(id => {
+        const mat = subjects.find(s => s.dataset.id === id);
+        if (mat) {
+          const area = mat.dataset.area;
           const creditos = parseInt(mat.dataset.creditos) || 0;
           creditosPorArea[area] = (creditosPorArea[area] || 0) + creditos;
         }
@@ -6,7 +49,6 @@ const area = mat.dataset.area;
       return creditosPorArea;
     }
 
-    // Función para calcular créditos totales aprobados
     function calcularCreditosTotales() {
       let total = 0;
       aprobadas.forEach(id => {
@@ -18,73 +60,59 @@ const area = mat.dataset.area;
       return total;
     }
 
-    // Función que determina si una materia está habilitada para cursar
     function estaHabilitada(mat, creditosPorArea, creditosTotales) {
-      // 1) Chequear previas
       const prereqs = parsePrereqs(mat.dataset.prereq);
       for (const pre of prereqs) {
         if (!aprobadas.has(pre)) return false;
       }
 
-      // 2) Chequear créditos mínimos en área si aplica
-      const area = mat.dataset.area;
+      // Revisión créditos mínimos en área
       if (mat.dataset.creditosRequeridosArea) {
-        const reqArea = mat.dataset.creditosRequeridosArea;
-        const reqAreaCantidad = parseInt(mat.dataset.creditosRequeridosAreaCantidad || '0');
-        if (!creditosPorArea[reqArea] || creditosPorArea[reqArea] < reqAreaCantidad) return false;
+        const areaReq = mat.dataset.creditosRequeridosArea;
+        const cantReq = parseInt(mat.dataset.creditosRequeridosAreaCantidad || '0');
+        if (!creditosPorArea[areaReq] || creditosPorArea[areaReq] < cantReq) return false;
       }
 
-      // 3) Chequear créditos mínimos totales si aplica
+      // Créditos totales mínimos
       if (mat.dataset.creditosRequeridosTotal) {
-        const reqTotal = parseInt(mat.dataset.creditosRequeridosTotal);
-        if (creditosTotales < reqTotal) return false;
+        const minTotal = parseInt(mat.dataset.creditosRequeridosTotal);
+        if (creditosTotales < minTotal) return false;
       }
 
-      // 4) Chequear créditos mínimos por otras áreas (opcional)
-      // Para soportar varios requisitos de áreas distintas (ej. gestión financiera)
+      // Créditos mínimos por otras áreas (ejemplo: distintas áreas en misma materia)
       for (const key of Object.keys(mat.dataset)) {
-        if (key.startsWith('creditosRequeridosArea')) {
-          // Excluimos el genérico creditosRequeridosArea y creditosRequeridosAreaCantidad
-          if (key === 'creditosRequeridosArea' || key === 'creditosRequeridosAreaCantidad') continue;
-          // Ejemplo: creditosRequeridosAreaAdministracion, creditosRequeridosAreaJuridica
-          const areaReq = key.replace('creditosRequeridosArea', '').toLowerCase();
-          const reqCant = parseInt(mat.dataset[key] || '0');
-          // Normalizamos área a minúsculas y comparamos con creditosPorArea
-          const creditosAreaAprob = creditosPorArea[areaReq.charAt(0).toUpperCase() + areaReq.slice(1)] || 0;
-          if (creditosAreaAprob < reqCant) return false;
+        if (key.startsWith('creditosRequeridosArea') && key !== 'creditosRequeridosArea' && key !== 'creditosRequeridosAreaCantidad') {
+          const areaName = key.replace('creditosRequeridosArea', '');
+          const areaNameLower = areaName.charAt(0).toUpperCase() + areaName.slice(1).toLowerCase();
+          const cant = parseInt(mat.dataset[key]);
+          if ((creditosPorArea[areaNameLower] || 0) < cant) return false;
         }
       }
 
       return true;
     }
 
-    // Función para actualizar visualización y estados
     function actualizarEstado() {
       const creditosPorArea = calcularCreditosPorArea();
       const creditosTotales = calcularCreditosTotales();
 
       subjects.forEach(mat => {
         const id = mat.dataset.id;
-
         if (aprobadas.has(id)) {
           mat.classList.add('aprobado');
-          mat.classList.remove('no_cursada');
-          mat.classList.remove('no_habilitada');
+mat.classList.remove('no_cursada', 'no_habilitada');
         } else {
           if (estaHabilitada(mat, creditosPorArea, creditosTotales)) {
             mat.classList.add('no_cursada');
-            mat.classList.remove('no_habilitada');
-            mat.classList.remove('aprobado');
+            mat.classList.remove('no_habilitada', 'aprobado');
           } else {
             mat.classList.add('no_habilitada');
-            mat.classList.remove('no_cursada');
-            mat.classList.remove('aprobado');
+            mat.classList.remove('no_cursada', 'aprobado');
           }
         }
       });
     }
 
-    // Evento click para marcar/desmarcar como aprobada
     subjects.forEach(mat => {
       mat.addEventListener('click', () => {
         const id = mat.dataset.id;
@@ -97,7 +125,6 @@ const area = mat.dataset.area;
       });
     });
 
-    // Inicializar estado al cargar
     actualizarEstado();
   </script>
 </body>
