@@ -89,7 +89,11 @@
     }
 
     const subjects = Array.from(document.querySelectorAll('.subject'));
-    let aprobadas = new Set();
+    let aprobadas = new Set(JSON.parse(localStorage.getItem('aprobadas')) || []);
+
+    function guardarAprobadas() {
+      localStorage.setItem('aprobadas', JSON.stringify(Array.from(aprobadas)));
+    }
 
     function calcularCreditosPorArea() {
       const creditosPorArea = {};
@@ -182,4 +186,3 @@
   </script>
 </body>
 </html>
-                                
