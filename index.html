@@ -1,61 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Mi Malla - Contador Público (FCEA)</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Mi Malla - Contador Público (FCEA)</h1>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin: 0;
+}
 
-  <div class="grid">
-    <!-- Primer año -->
-    <div class="year">
-      <h2>1er año</h2>
-      <div class="subject aprobado">Conceptos Contables</div>
-      <div class="subject aprobado">Administración y Gestión de las Organizaciones</div>
-      <div class="subject aprobado">Cálculo 1A</div>
-      <div class="subject aprobado">Cálculo 1B</div>
-      <div class="subject">Matemática Financiera</div>
-      <div class="subject cursando">Introducción a la Microeconomía</div>
-    </div>
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
 
-    <!-- Segundo año -->
-    <div class="year">
-      <h2>2do año</h2>
-      <div class="subject aprobado">Contabilidad General 2</div>
-      <div class="subject aprobado">Procesos y Sistemas de Información</div>
-      <div class="subject cursando">Introducción a la Estadística</div>
-      <div class="subject">Macroeconomía</div>
-      <div class="subject aprobado">Derecho Civil</div>
-      <div class="subject cursando">Derecho Comercial</div>
-    </div>
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
 
-    <!-- Tercer año -->
-    <div class="year">
-      <h2>3er año</h2>
-      <div class="subject cursando">Derecho Societario</div>
-      <div class="subject">Contabilidad de Costos</div>
-      <div class="subject">Contabilidad Superior</div>
-      <div class="subject">Estadística Inferencial</div>
-      <div class="subject">Finanzas I</div>
-      <div class="subject">Derecho del Trabajo</div>
-    </div>
+.year {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 250px;
+}
 
-    <!-- Cuarto año -->
-    <div class="year">
-      <h2>4to año</h2>
-      <div class="subject">Impuestos I</div>
-      <div class="subject">Finanzas II</div>
-      <div class="subject">Auditoría</div>
-      <div class="subject">Contabilidad Pública</div>
-      <div class="subject">Ética Profesional</div>
-      <div class="subject">Taller de Memoria</div>
-    </div>
-  </div>
+.year h2 {
+  text-align: center;
+  color: #34495e;
+  margin-bottom: 10px;
+}
 
-  <footer>
-    <p>Actualizado por Melina - Julio 2025</p>
-  </footer>
-</body>
-</html>
+.subject {
+  background-color: #ecf0f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  color: #2c3e50;
+  transition: transform 0.2s ease;
+}
+
+.subject:hover {
+  transform: scale(1.03);
+}
+
+.aprobado {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.cursando {
+  background-color: #f1c40f;
+  color: black;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #888;
+}
