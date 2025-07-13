@@ -3,60 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Malla Interactiva Contador Público</title>
+  <title>Malla Interactiva Básica</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    .node { padding: 5px 10px; border-radius: 5px; color: white; margin: 5px 0; display: inline-block; }
-    .aprobada { background-color: #4CAF50; }
-    .cursando { background-color: #FFC107; }
-    .pendiente { background-color: #9E9E9E; }
+    .node { margin: 5px 0; padding: 5px; border: 1px solid #333; }
   </style>
 </head>
 <body>
-  <h1>Malla Interactiva - Contador Público (Plan 2012)</h1>
+  <h1>Prueba Malla</h1>
   <div id="malla"></div>
 
   <script>
-    const data = {
-      nodes: [
-        { id: 0, label: "Conceptos Contables", status: "aprobada" },
-        { id: 1, label: "Administración y Gestión de las Organizaciones", status: "aprobada" },
-        { id: 2, label: "Cálculo 1A", status: "aprobada" },
-        { id: 3, label: "Cálculo 1B", status: "aprobada" },
-        { id: 4, label: "Contabilidad General I", status: "pendiente" },
-        { id: 5, label: "Derecho Civil I", status: "aprobada" },
-        { id: 6, label: "Procesos y Sistemas de Información", status: "aprobada" },
-        { id: 7, label: "Introducción a la Microeconomía", status: "cursando" },
-        { id: 8, label: "Contabilidad General II", status: "cursando" },
-        { id: 9, label: "Introducción a la Estadística", status: "cursando" },
-        { id: 10, label: "Derecho Comercial I", status: "cursando" },
-        { id: 11, label: "Derecho Societario", status: "cursando" },
-        { id: 12, label: "Matemática II", status: "pendiente" },
-        { id: 13, label: "Estadística II", status: "pendiente" },
-        { id: 14, label: "Teoría Contable", status: "pendiente" },
-        { id: 15, label: "Costos I", status: "pendiente" },
-        { id: 16, label: "Contabilidad General III", status: "pendiente" },
-        { id: 17, label: "Finanzas I", status: "pendiente" },
-        { id: 18, label: "Sistemas Contables", status: "pendiente" },
-        { id: 19, label: "Administración Financiera", status: "pendiente" },
-        { id: 20, label: "Auditoría", status: "pendiente" },
-        { id: 21, label: "Derecho Tributario I", status: "pendiente" },
-        { id: 22, label: "Costos II", status: "pendiente" },
-        { id: 23, label: "Contabilidad General IV", status: "pendiente" },
-        { id: 24, label: "Derecho Comercial II", status: "pendiente" },
-        { id: 25, label: "Tributación II", status: "pendiente" },
-        { id: 26, label: "Taller de Ética Profesional", status: "pendiente" },
-        { id: 27, label: "Taller de Práctica Profesional", status: "pendiente" }
-      ]
+    window.onload = function() {
+      const data = ["Contabilidad General I", "Cálculo 1A", "Derecho Civil"];
+      const mallaDiv = document.getElementById("malla");
+      data.forEach(label => {
+        const div = document.createElement("div");
+        div.textContent = label;
+        div.className = "node";
+        mallaDiv.appendChild(div);
+      });
     };
-
-    const mallaDiv = document.getElementById("malla");
-    data.nodes.forEach(node => {
-      const div = document.createElement("div");
-      div.textContent = node.label;
-      div.className = node ${node.status};
-      mallaDiv.appendChild(div);
-    });
   </script>
 </body>
 </html>
