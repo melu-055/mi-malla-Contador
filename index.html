@@ -9,7 +9,7 @@
   <h1>Malla Contador Público (FCEA) - Por Semestres</h1>
 
   <div class="grid">
-    <!-- Semestres y materias aquí, con sus data-* para lógica -->
+    <!-- Semestre 1 -->
     <div class="semester">
       <h2>Semestre 1</h2>
       <div class="subject no_cursada" data-id="conceptos-contables" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="">Conceptos contables</div>
@@ -19,8 +19,64 @@
       <div class="subject no_habilitada" data-id="calculo-1b" data-area="Metodos Cuantitativos" data-creditos="5" data-prereq="calculo-1a">Cálculo 1B</div>
     </div>
 
-    <!-- Sigue igual para los demás semestres -->
-    <!-- ... -->
+    <!-- Semestre 2 -->
+    <div class="semester">
+      <h2>Semestre 2</h2>
+      <div class="subject no_habilitada" data-id="contabilidad-general-1" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="conceptos-contables">Contabilidad General 1</div>
+      <div class="subject no_cursada" data-id="derecho-civil" data-area="Juridica" data-creditos="10" data-prereq="">Derecho Civil</div>
+      <div class="subject no_cursada" data-id="economia-descriptiva" data-area="Economia" data-creditos="10" data-prereq="">Economía Descriptiva</div>
+    </div>
+
+    <!-- Semestre 3 -->
+    <div class="semester">
+      <h2>Semestre 3</h2>
+      <div class="subject no_habilitada" data-id="introduccion-estadistica" data-area="Metodos Cuantitativos" data-creditos="10" data-prereq="calculo-1b">Introducción a la Estadística</div>
+      <div class="subject no_habilitada" data-id="contabilidad-general-2" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="contabilidad-general-1">Contabilidad General 2</div>
+      <div class="subject no_habilitada" data-id="derecho-comercial" data-area="Juridica" data-creditos="10" data-prereq="derecho-civil">Derecho Comercial</div>
+      <div class="subject no_habilitada" data-id="procesos-sistemas-informacion" data-area="Administracion" data-creditos="10" data-prereq="administracion-gestion-organizaciones-1">Procesos y Sistemas de Información</div>
+    </div>
+
+    <!-- Semestre 4 -->
+    <div class="semester">
+      <h2>Semestre 4</h2>
+      <div class="subject no_habilitada" data-id="contabilidad-general-3" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="contabilidad-general-2">Contabilidad General 3</div>
+      <div class="subject no_habilitada" data-id="matematicas-financiera" data-area="Metodos Cuantitativos" data-creditos="10" data-prereq="introduccion-estadistica">Matemática Financiera</div>
+      <div class="subject no_habilitada" data-id="legislacion-laboral-seguridad-social" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="conceptos-contables,derecho-civil">Legislación Laboral y Seguridad Social</div>
+      <div class="subject no_habilitada" data-id="derecho-societario" data-area="Juridica" data-creditos="10" data-prereq="derecho-civil">Derecho Societario</div>
+    </div>
+
+    <!-- Semestre 5 -->
+    <div class="semester">
+      <h2>Semestre 5</h2>
+      <div class="subject no_habilitada" data-id="modelos-sistemas-costos" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="contabilidad-general-3">Modelos y Sistemas de Costos</div>
+      <div class="subject no_habilitada" data-id="derecho-tributario" data-area="Juridica" data-creditos="10" data-creditos-requeridos-area="Juridica" data-creditos-requeridos-area-cantidad="10" data-prereq="">Derecho Tributario</div>
+      <div class="subject no_habilitada" data-id="etica-ejercicio-profesional" data-area="Actividades Integradoras" data-creditos="5" data-prereq="contabilidad-general-2,derecho-comercial">Ética y Ejercicio Profesional</div>
+    </div>
+
+    <!-- Semestre 6 -->
+    <div class="semester">
+      <h2>Semestre 6</h2>
+      <div class="subject no_habilitada" data-id="contabilidad-superior-1" data-area="Contabilidad e Impuestos" data-creditos="10" data-creditos-requeridos-area="Contabilidad e Impuestos" data-creditos-requeridos-area-cantidad="50" data-prereq="">Contabilidad Superior 1</div>
+      <div class="subject no_habilitada" data-id="control-interno" data-area="Contabilidad e Impuestos" data-creditos="10" data-creditos-requeridos-area="Contabilidad e Impuestos" data-creditos-requeridos-area-cantidad="40" data-prereq="procesos-sistemas-informacion">Control Interno</div>
+      <div class="subject no_habilitada" data-id="contabilidad-gerencial" data-area="Contabilidad e Impuestos" data-creditos="10" data-creditos-requeridos-total="160" data-prereq="modelos-sistemas-costos,matematicas-financiera">Contabilidad Gerencial</div>
+      <div class="subject no_habilitada" data-id="tributaria-1" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="contabilidad-general-3,derecho-tributario">Tributaria 1</div>
+    </div>
+
+    <!-- Semestre 7 -->
+    <div class="semester">
+      <h2>Semestre 7</h2>
+      <div class="subject no_habilitada" data-id="auditoria-1" data-area="Contabilidad e Impuestos" data-creditos="10" data-creditos-requeridos-total="160" data-prereq="derecho-societario,legislacion-laboral-seguridad-social,control-interno,contabilidad-superior-1">Auditoría 1</div>
+      <div class="subject no_habilitada" data-id="tributaria-2" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="tributaria-1">Tributaria 2</div>
+      <div class="subject no_habilitada" data-id="finanzas-corporativas" data-area="Administracion" data-creditos="10" data-prereq="administracion-gestion-organizaciones-1,matematicas-financiera" data-creditos-requeridos-area="Contabilidad e Impuestos" data-creditos-requeridos-area-cantidad="40" data-creditos-requeridos-area-economia="Economia" data-creditos-requeridos-area-economia-cantidad="30" data-creditos-requeridos-total="180">Finanzas Corporativas</div>
+    </div>
+
+    <!-- Semestre 8 -->
+    <div class="semester">
+      <h2>Semestre 8</h2>
+      <div class="subject no_habilitada" data-id="informes-profesionales-contador-publico" data-area="Contabilidad e Impuestos" data-creditos="10" data-prereq="auditoria-1">Informes Profesionales de Contador Público</div>
+      <div class="subject no_habilitada" data-id="practica-pericial-ambito-judicial" data-area="Actividades Integradoras" data-creditos="5" data-prereq="contabilidad-superior-1,derecho-comercial,derecho-societario,etica-ejercicio-profesional">Práctica Pericial en el Ámbito Judicial</div>
+      <div class="subject no_habilitada" data-id="gestion-financiera-del-estado" data-area="Administracion" data-creditos="10" data-creditos-requeridos-area="Contabilidad e Impuestos" data-creditos-requeridos-area-cantidad="30" data-creditos-requeridos-area-administracion="Administracion" data-creditos-requeridos-area-administracion-cantidad="20" data-creditos-requeridos-area-juridica="Juridica" data-creditos-requeridos-area-juridica-cantidad="15" data-creditos-requeridos-total="180" data-prereq="">Gestión Financiera del Estado</div>
+    </div>
   </div>
 
   <footer>
@@ -28,7 +84,6 @@
   </footer>
 
   <script>
-    // Función para convertir un string de prereqs separados por coma en array
     function parsePrereqs(prereqStr) {
       return prereqStr ? prereqStr.split(',').map(s => s.trim()).filter(s => s.length > 0) : [];
     }
@@ -66,20 +121,17 @@
         if (!aprobadas.has(pre)) return false;
       }
 
-      // Revisión créditos mínimos en área
       if (mat.dataset.creditosRequeridosArea) {
         const areaReq = mat.dataset.creditosRequeridosArea;
         const cantReq = parseInt(mat.dataset.creditosRequeridosAreaCantidad || '0');
         if (!creditosPorArea[areaReq] || creditosPorArea[areaReq] < cantReq) return false;
       }
 
-      // Créditos totales mínimos
       if (mat.dataset.creditosRequeridosTotal) {
         const minTotal = parseInt(mat.dataset.creditosRequeridosTotal);
         if (creditosTotales < minTotal) return false;
       }
 
-      // Créditos mínimos por otras áreas (ejemplo: distintas áreas en misma materia)
       for (const key of Object.keys(mat.dataset)) {
         if (key.startsWith('creditosRequeridosArea') && key !== 'creditosRequeridosArea' && key !== 'creditosRequeridosAreaCantidad') {
           const areaName = key.replace('creditosRequeridosArea', '');
@@ -100,7 +152,7 @@
         const id = mat.dataset.id;
         if (aprobadas.has(id)) {
           mat.classList.add('aprobado');
-mat.classList.remove('no_cursada', 'no_habilitada');
+          mat.classList.remove('no_cursada', 'no_habilitada');
         } else {
           if (estaHabilitada(mat, creditosPorArea, creditosTotales)) {
             mat.classList.add('no_cursada');
@@ -129,3 +181,4 @@ mat.classList.remove('no_cursada', 'no_habilitada');
   </script>
 </body>
 </html>
+                                
