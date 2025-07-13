@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Interactiva Contador Público</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  .node { padding: 5px 10px; border-radius: 5px; color: white; cursor: pointer; }
+  .aprobada { background-color: #4CAF50; }
+  .cursando { background-color: #FFC107; }
+  .pendiente { background-color: #9E9E9E; }
+</style>
+</head>
+<body>
+<h1>Malla Interactiva - Contador Público (Plan 2012)</h1>
+<div id="malla"></div>
+
+<script>
+fetch('course.json')
+  .then(response => response.json())
+  .then(data => {
+    const mallaDiv = document.getElementById('malla');
+    data.nodes.forEach(node => {
+      const div = document.createElement('div');
+      div.textContent = node.label;
+      div.className = node ${node.status};
+      mallaDiv.appendChild(div);
+    });
+  });
+</script>
+</body>
+</html>
