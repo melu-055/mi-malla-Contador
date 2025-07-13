@@ -1,37 +1,39 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #fff4f7; /* rosita clarito */
   padding: 20px;
   margin: 0;
 }
 
 h1 {
   text-align: center;
-  color: #2c3e50;
+  color: #a85182;
   margin-bottom: 30px;
 }
 
 .grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 20px;
+  padding-bottom: 20px;
 }
 
 .semester {
-  background-color: #f9e6ef; /* rosado pastel suave */
+  background-color: #f9e6ef;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   width: 250px;
-  min-height: 180px;
+  min-width: 250px;
+  flex-shrink: 0;
 }
 
 .semester h2 {
   font-size: 1.2em;
   text-align: center;
   margin-bottom: 15px;
-  color: #d36cae; /* violeta pastel */
+  color: #d36cae;
   font-weight: bold;
   border-bottom: 2px solid #d36cae;
   padding-bottom: 5px;
@@ -43,31 +45,13 @@ h1 {
   border-radius: 6px;
   font-weight: bold;
   text-align: center;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
+  transition: all 0.3s ease;
 }
 
 /* Estados */
 .aprobado {
-  background-color: #b399c8; /* violeta pastel */
+  background-color: #b399c8;
   color: #4b3869;
-  text-decoration: line-through;
-}
-
-.no_cursada {
-  background-color: #f2a1b9; /* rosado pastel más fuerte */
-  color: #5a2640;
-}
-
-.no_habilitada {
-  background-color: #cccccc; /* gris */
-  color: #666666;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 0.9em;
-  color: #888;
-}
+  text-decoration
